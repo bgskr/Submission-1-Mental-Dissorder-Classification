@@ -51,59 +51,95 @@ Dengan langkah-langkah ini, diharapkan model klasifikasi yang dikembangkan dapat
 
 ## Data Understanding
 
-Dalam proyek ini, dataset yang digunakan adalah **Mental Disorder Classification** yang diambil dari Kaggle. Dataset ini berisi informasi tentang berbagai gejala yang dialami oleh individu dan klasifikasi gangguan mental mereka. Dataset ini dapat diunduh melalui tautan berikut: [Kaggle Mental Disorder Classification Dataset](https://www.kaggle.com/cid007/mental-disorder-classification).
+Dataset ini berisi data dari **120 pasien psikologi** yang terdiri dari **17 gejala esensial** yang digunakan untuk mendiagnosis beberapa kondisi mental: **Bipolar Mania Disorder**, **Bipolar Depressive Disorder**, **Major Depressive Disorder**, dan individu **Normal**. Dataset ini tersedia dalam format **CSV** dan dapat diakses melalui [Kaggle](https://www.kaggle.com/datasets/cid007/mental-disorder-classification).
 
-### Variabel-variabel pada Mental Disorder Classification dataset adalah sebagai berikut:
+### Informasi Data
+Dataset ini mencakup gejala perilaku utama yang digunakan oleh psikiater untuk mendiagnosis gangguan yang disebutkan. Gejala-gejala ini meliputi:
 
-1. **Patient Number**: Merupakan identitas unik untuk setiap pasien dalam dataset.
-2. **Sadness**: Skor yang menunjukkan tingkat kesedihan yang dialami pasien.
-3. **Euphoric**: Skor yang menunjukkan tingkat euforia yang dialami pasien.
-4. **Exhausted**: Skor yang menunjukkan tingkat kelelahan yang dialami pasien.
-5. **Sleep Disorder**: Indikator apakah pasien mengalami gangguan tidur (1 untuk ya, 0 untuk tidak).
-6. **Mood Swing**: Skor yang menunjukkan frekuensi perubahan suasana hati yang dialami pasien.
-7. **Suicidal Thoughts**: Indikator apakah pasien memiliki pemikiran untuk bunuh diri (1 untuk ya, 0 untuk tidak).
-8. **Anorexia**: Indikator apakah pasien mengalami anoreksia (1 untuk ya, 0 untuk tidak).
-9. **Authority Respect**: Skor yang menunjukkan seberapa besar rasa hormat pasien terhadap otoritas.
-10. **Try-Explanation**: Skor yang menunjukkan sejauh mana pasien berusaha untuk menjelaskan perasaan atau kondisinya.
-11. **Aggressive Response**: Skor yang menunjukkan kecenderungan respon agresif yang dimiliki pasien.
-12. **Ignore & Move-On**: Skor yang menunjukkan kemampuan pasien untuk mengabaikan masalah dan melanjutkan hidup.
-13. **Nervous Break-down**: Indikator apakah pasien pernah mengalami krisis saraf (1 untuk ya, 0 untuk tidak).
-14. **Admit Mistakes**: Skor yang menunjukkan seberapa besar kemampuan pasien untuk mengakui kesalahan.
-15. **Overthinking**: Skor yang menunjukkan kecenderungan pasien untuk berpikir berlebihan.
-16. **Sexual Activity**: Skor yang menunjukkan frekuensi aktivitas seksual pasien.
-17. **Concentration**: Skor yang menunjukkan kemampuan konsentrasi pasien.
-18. **Optimism**: Skor yang menunjukkan tingkat optimisme pasien terhadap hidup.
-19. **Expert Diagnose**: Label yang menunjukkan jenis gangguan mental yang didiagnosis oleh ahli (misalnya, Bipolar Type-1, Bipolar Type-2, Depression, Normal).
+1. **Patient Number**: Nomor unik yang berfungsi sebagai identitas untuk setiap pasien. Kolom ini adalah nilai nominal yang tidak akan digunakan dalam analisis prediktif, namun penting untuk identifikasi data.
+  
+2. **Sadness**: Mengukur tingkat kesedihan yang dirasakan pasien.
 
-### Exploratory Data Analysis (EDA)
+3. **Euphoric**: Menggambarkan tingkat perasaan euforia atau kebahagiaan ekstrem. Data ini dapat membantu menganalisis pola suasana hati yang berfluktuasi.
 
-Untuk memahami data lebih lanjut, beberapa teknik visualisasi dan analisis eksploratif akan dilakukan, seperti:
+4. **Exhausted**: Mengukur frekuensi pasien merasa kelelahan. Nilai dalam kolom ini menunjukkan tingkat energi fisik atau mental dan bisa menjadi indikasi dari kondisi kesehatan mental.
 
-- **Visualisasi Distribusi**: Menggunakan histogram atau boxplot untuk menggambarkan distribusi setiap fitur dan mendeteksi adanya outlier.
-- **Korelasi Antar Variabel**: Menggunakan heatmap untuk melihat hubungan antara fitur-fitur, sehingga dapat diidentifikasi fitur mana yang memiliki korelasi tinggi dengan target variabel (Expert Diagnose).
-- **Statistik Deskriptif**: Menganalisis nilai rata-rata, median, modus, dan nilai minimum-maksimum dari fitur numerik untuk memberikan gambaran umum tentang data.
+5. **Sleep Disorder**: Menunjukkan apakah pasien memiliki gangguan tidur, seperti insomnia atau gangguan tidur lainnya. Kondisi ini sangat terkait dengan kesehatan mental.
 
-Dengan langkah-langkah ini, kita dapat memperoleh pemahaman yang lebih baik tentang dataset yang digunakan dan bagaimana variabel-variabel tersebut saling berinteraksi.
+6. **Mood Swing**: Mencatat ada atau tidaknya perubahan suasana hati yang ekstrim pada pasien, yang mungkin menunjukkan kondisi seperti bipolar atau depresi.
+
+7. **Suicidal Thoughts**: Kolom ini mencatat ada atau tidaknya pikiran bunuh diri pada pasien. Ini merupakan indikator yang sangat penting dalam menilai tingkat risiko pasien terkait masalah kesehatan mental.
+
+8. **Anorexia**: Mencatat apakah pasien menunjukkan tanda-tanda anoreksia atau gangguan makan lainnya, yang seringkali berhubungan dengan kondisi psikologis tertentu.
+
+9. **Authority Respect**: Mengukur apakah pasien memiliki tingkat hormat terhadap otoritas. Ini dapat menjadi indikator dari aspek kepribadian yang mungkin relevan dalam analisis kesehatan mental.
+
+10. **Try-Explanation**: Menunjukkan seberapa sering pasien mencoba memberikan penjelasan atas perilaku atau tindakan mereka, yang bisa memberikan wawasan tentang kecenderungan mereka untuk merefleksikan atau memahami diri mereka sendiri.
+
+11. **Aggressive Response**: Menilai respons agresif yang mungkin ditunjukkan oleh pasien dalam situasi tertentu, yang bisa menjadi tanda dari gangguan emosi atau kontrol impuls.
+
+12. **Ignore & Move-On**: Menunjukkan kecenderungan pasien untuk mengabaikan masalah dan melanjutkan hidup, yang mungkin relevan dalam konteks mekanisme koping (coping mechanisms).
+
+13. **Nervous Break-down**: Mencatat ada atau tidaknya kecenderungan pasien untuk mengalami gangguan saraf atau kepanikan, yang dapat menjadi tanda kondisi kecemasan.
+
+14. **Admit Mistakes**: Menunjukkan apakah pasien cenderung mengakui kesalahan mereka, yang bisa memberikan gambaran tentang aspek-aspek tertentu dari kepribadian atau kesehatan mental mereka.
+
+15. **Overthinking**: Mengukur tingkat kecenderungan untuk berpikir berlebihan yang sering kali dikaitkan dengan kondisi kecemasan dan depresi.
+
+16. **Sexual Activity**: Menunjukkan tingkat aktivitas seksual pasien, yang dapat berfungsi sebagai indikator dari pola perilaku tertentu atau kondisi mental.
+
+17. **Concentration**: Menilai kemampuan pasien untuk berkonsentrasi. Konsentrasi yang rendah dapat menjadi gejala dari gangguan mental seperti depresi atau ADHD.
+
+18. **Optimism**: Menunjukkan tingkat optimisme pasien dalam kehidupan mereka, yang berperan sebagai indikator kesejahteraan mental secara umum.
+
+19. **Expert Diagnose**: Kolom ini adalah diagnosis akhir dari ahli mengenai kondisi mental pasien, seperti Bipolar Type-1, Bipolar Type-2, Depresi, atau Normal. Kolom ini berfungsi sebagai variabel target dalam analisis prediktif kita.  
+
+Untuk kolom 2-5 memiliki data kategorikal dengan nilai:
+*   Seldom
+*   Sometimes
+*   Usually
+*   Most-Often
+
+
+Untuk kolom 6-15 memiliki data dalam bentuk boolean yaitu YES dan NO  
+Untuk kolom 16-18 memiliki data dengan bentuk scoring, seperti 4 dari 10  
+Dan kolom terakhir merupakan data dengan bentuk kategorikal dengan nilai sebagai berikut:
+*   Bipolar Type-1
+*   Bipolar Type-2
+*   Depression
+*   Normal  
+  
+Setiap fitur ini dirancang untuk memberikan gambaran menyeluruh tentang kondisi mental pasien dan merupakan aspek-aspek penting yang digunakan dalam pemodelan prediksi.
+### Kondisi Data
+Dataset ini tidak mengandung **nilai hilang** atau **nilai duplikat**, sehingga dapat langsung digunakan dalam analisis. Namun, dengan jumlah yang begitu sedikit,perlu ditambahkan proses augmentasi untuk memperkaya variasi data pelatihan sehingga mampu meningkatkan performa model yang dibuat.
 
 ## Data Preparation
 
 Pada bagian ini, beberapa teknik data preparation diterapkan untuk memastikan data siap digunakan dalam model machine learning. Tahapan yang dilakukan meliputi:
+1. **Jumlah Nilai Setiap Kolom**
+   - Menghitung jumlah nilai pada setiap kolom dengan melakukan perulangan dan memanfaatkan fungsi values_count(). Didapati bahwa terdapat satu value pada kolom "Suicidal Thoughts" yang memiliki nilai sama namun dianggap sebagai nilai yang unik. Dengan asumsi terdapat _whitespace_ pada nilai tersebut,maka akan dilakukan pergantian nilai agar sesuai dan terhitung sebagai satu nilai yang sudah ada (mirip), yaitu nilai YES.
 
-1. **Penghapusan Kolom yang Tidak Relevan**:
+3. **Penghapusan Kolom yang Tidak Relevan**:
    - Menghapus kolom **Patient Number** karena kolom ini tidak memberikan informasi yang relevan untuk analisis dan hanya berfungsi sebagai identifikasi unik. Menghapus fitur yang tidak diperlukan dapat membantu mengurangi kompleksitas model dan meningkatkan performa.
 
-2. **Kategorisasi Variabel Kategorikal**:
+4. **Mengganti Nama Kolom**
+   - Nama kolom diubah ke format `snake_case` untuk konsistensi dan mempermudah akses data. Proses penggantian dilakukan dengan menggunakan fungsi `replace` untuk mengganti simbol-simbol atau spasi dengan tanda underscore (`_`). Misalnya, kolom dengan nama `Sleep Disorder` diubah menjadi `sleep_disorder`. Langkah ini meningkatkan keterbacaan dan menjaga format penamaan agar lebih sesuai dengan standar Python.
+     
+5. **Kategorisasi Variabel Kategorikal**:
    - Mengubah variabel kategorikal menjadi representasi numerik menggunakan **Label Encoding** untuk kolom **Expert Diagnose**. Proses ini diperlukan agar model dapat memahami data dalam bentuk numerik, karena banyak algoritma machine learning hanya dapat bekerja dengan data numerik.
 
-3. **Normalisasi atau Standarisasi**:
+6. **Normalisasi atau Standarisasi**:
    - Menerapkan **StandardScaler** untuk menormalkan fitur numerik. Standarisasi diperlukan agar semua fitur berada pada skala yang sama, yang membantu dalam mempercepat proses pelatihan dan meningkatkan konvergensi model.
 
-4. **Augmentasi Data**:
+7. **Augmentasi Data**:
    - Menerapkan teknik **SMOTE (Synthetic Minority Over-sampling Technique)** untuk menyeimbangkan kelas pada target variabel. Ini penting dilakukan mengingat dataset awal memiliki ketidakseimbangan kelas yang signifikan, yang dapat menyebabkan model bias. Dengan augmentasi, kita mendapatkan dataset yang lebih seimbang yang dapat meningkatkan akurasi model.
 
-5. **PCA (Principal Component Analysis)**:
+8. **PCA (Principal Component Analysis)**:
    - Menggunakan PCA untuk mereduksi dimensi dataset dengan mempertahankan 90% varians. Proses ini membantu mengurangi kompleksitas data dan menghilangkan noise yang tidak perlu, sehingga meningkatkan efisiensi pelatihan model.
 
+9. **Pembagian Data**:
+   - Dataset dibagi menjadi dua bagian: training set (80%) dan test set (20%) menggunakan metode **train_test_split**. Pembagian ini penting untuk menguji kinerja model setelah dilatih.
+     
 ### Alasan Perlunya Tahapan Data Preparation
 
 Proses data preparation sangat penting dalam pengembangan model machine learning karena:
@@ -115,27 +151,19 @@ Proses data preparation sangat penting dalam pengembangan model machine learning
 
 Melalui tahapan ini, kita dapat memastikan bahwa data yang digunakan dalam model machine learning siap untuk dianalisis dan menghasilkan prediksi yang akurat.
 
-## Modeling
+## Model Development
 
-Dalam tahapan ini, model machine learning yang digunakan untuk menyelesaikan permasalahan klasifikasi gangguan mental adalah **K-Nearest Neighbors (KNN)**. Model KNN dipilih karena kemudahan implementasinya dan kemampuannya dalam menangani data yang tidak seimbang setelah menggunakan teknik SMOTE.
+Pada tahap ini, model K-Nearest Neighbors (KNN) digunakan untuk klasifikasi data mental illness. KNN bekerja dengan menentukan jarak antara data baru dan titik data yang ada dalam dataset pelatihan, lalu menentukan kelas dari data baru berdasarkan mayoritas kelas dari tetangga terdekatnya. 
 
-### Tahapan Pemodelan
+Model ini dikonfigurasi dengan parameter `n_neighbors=3`, artinya model mempertimbangkan tiga tetangga terdekat saat menentukan kelas untuk data baru. Setelah pelatihan model pada dataset `X_train` dan `y_train`, model ini dievaluasi pada `X_test`, dan hasil prediksi dibandingkan dengan nilai asli (`y_test`) untuk menghitung akurasi dan laporan klasifikasi yang mencakup metrik seperti precision, recall, dan F1-score.
 
-1. **Pembagian Data**:
-   - Dataset dibagi menjadi dua bagian: training set (80%) dan test set (20%) menggunakan metode **train_test_split**. Pembagian ini penting untuk menguji kinerja model setelah dilatih.
+### Alur Kerja Model KNN
 
-2. **Inisialisasi Model**:
-   - Model KNN diinisialisasi dengan parameter **n_neighbors** yang diatur ke 3. Parameter ini menentukan jumlah tetangga terdekat yang akan dipertimbangkan untuk klasifikasi.
+1. **Pengukuran Jarak:** Menghitung jarak antara data uji dan setiap titik data pelatihan.
+2. **Pemilihan Tetangga Terdekat:** Memilih tiga titik data terdekat (berdasarkan `n_neighbors=3`).
+3. **Klasifikasi Berdasarkan Mayoritas:** Menentukan kelas data baru berdasarkan kelas mayoritas dari tiga tetangga terdekat.
 
-3. **Pelatihan Model**:
-   - Model KNN dilatih menggunakan training set dengan metode **fit()**. Selama proses ini, model belajar dari data yang ada untuk membentuk pola klasifikasi.
-
-4. **Prediksi**:
-   - Setelah model dilatih, langkah selanjutnya adalah melakukan prediksi terhadap test set menggunakan metode **predict()**. Hasil prediksi ini kemudian dibandingkan dengan label asli untuk menghitung akurasi.
-
-5. **Evaluasi Model**:
-   - Kinerja model dievaluasi dengan menggunakan metrik **accuracy** dan **classification report**, yang memberikan informasi lebih detail mengenai precision, recall, dan f1-score untuk setiap kelas.
-
+Dengan pendekatan ini, KNN mampu mengklasifikasikan tipe-tipe mental illness pada dataset ini secara efektif, meskipun akurasi dan performa model tetap bergantung pada distribusi dan kualitas data pelatihan yang tersedia.
 ### Kelebihan dan Kekurangan KNN
 
 **Kelebihan**:
@@ -148,66 +176,41 @@ Dalam tahapan ini, model machine learning yang digunakan untuk menyelesaikan per
 - **Sensitif terhadap Skala Data**: KNN memerlukan data yang dinormalisasi atau distandarisasi, karena pengaruh fitur dengan skala yang berbeda bisa mendistorsi hasil.
 - **Cenderung Terpengaruh oleh Noise**: Jika terdapat data outlier atau noise dalam dataset, KNN dapat memberikan hasil yang tidak akurat.
 
-### Hyperparameter Tuning
-
-Pada tahap ini, tidak dilakukan hyperparameter tuning untuk model KNN, namun penting untuk dicatat bahwa jika proses ini dilakukan, beberapa parameter yang dapat dioptimalkan termasuk:
-- **n_neighbors**: Mencoba nilai yang berbeda untuk menemukan jumlah tetangga terdekat yang paling optimal.
-- **metric**: Mengubah metrik yang digunakan untuk menghitung jarak (misalnya, menggunakan Manhattan distance alih-alih Euclidean distance).
-- **weights**: Mengubah bobot berdasarkan jarak, misalnya menggunakan "distance" untuk memberikan bobot lebih pada tetangga terdekat.
-
 ### Model Terbaik
 
 Mengingat bahwa hanya satu algoritma yang digunakan dalam proyek ini, yaitu KNN, model ini akan menjadi model terbaik berdasarkan hasil evaluasi yang dilakukan. Model ini dipilih karena performanya yang baik dalam mengklasifikasikan data gangguan mental setelah diterapkan teknik augmentasi dan standarisasi, meskipun mungkin ada potensi untuk peningkatan lebih lanjut melalui teknik tuning yang tidak dilakukan dalam proyek ini.
 
 ## Evaluation
 
-Dalam proyek ini, metrik evaluasi yang digunakan untuk mengukur kinerja model klasifikasi K-Nearest Neighbors (KNN) adalah **akurasi, precision, recall, dan F1 score**. Metrik-metrik ini dipilih karena memberikan gambaran yang komprehensif tentang kemampuan model dalam mengklasifikasikan data gangguan mental.
+Pada tahap evaluasi model K-Nearest Neighbors (KNN), model menghasilkan **akurasi sebesar 93%** dalam mengklasifikasikan kondisi mental **Bipolar Type-1, Bipolar Type-2, Depression,** dan **Normal**. Berikut adalah hasil evaluasi model secara rinci:
 
-### Penjelasan Metrik yang Digunakan
+| Kelas           | Precision | Recall | F1-score | Support |
+|-----------------|-----------|--------|----------|---------|
+| Bipolar Type-1  | 0.92      | 0.96   | 0.94     | 24      |
+| Bipolar Type-2  | 0.88      | 1.00   | 0.93     | 14      |
+| Depression      | 0.94      | 0.91   | 0.92     | 33      |
+| Normal          | 0.96      | 0.90   | 0.93     | 29      |
 
-1. **Akurasi**:
-   - Akurasi mengukur proporsi prediksi yang benar dari seluruh prediksi yang dilakukan. Formula untuk menghitung akurasi adalah:
-     
-     $\text{Akurasi} = \frac{\text{Jumlah Prediksi Benar}}{\text{Total Prediksi}}$
-     
-   - Akurasi yang tinggi menunjukkan bahwa model dapat mengklasifikasikan dengan baik, tetapi bisa menyesatkan jika dataset tidak seimbang.
+**Accuracy keseluruhan:** 0.93  
+**Macro average:** Precision = 0.92, Recall = 0.94, F1-score = 0.93  
+**Weighted average:** Precision = 0.93, Recall = 0.93, F1-score = 0.93  
 
-2. **Precision**:
-   - Precision mengukur seberapa tepat prediksi positif dari model dibandingkan dengan total prediksi positif. Formula untuk precision adalah:
-     
-     $\text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
-     $
-   - Precision yang tinggi menunjukkan bahwa sebagian besar prediksi positif adalah benar.
+### Analisis Metrik Evaluasi
+- **Precision** menunjukkan akurasi model dalam memprediksi tiap kategori dengan benar. Model memberikan nilai precision yang tinggi pada semua kelas, yang berarti kesalahan prediksi pada tiap kelas cukup minim.
+- **Recall** mengukur sensitivitas model dalam mendeteksi setiap kelas. Pada kelas **Bipolar Type-2**, recall mencapai 1.00, yang berarti model mampu mengenali setiap instance di kelas tersebut dengan sempurna.
+- **F1-score** memberikan keseimbangan antara precision dan recall. Nilai yang tinggi pada semua kelas menunjukkan bahwa model ini efektif dalam mendeteksi kasus dengan tingkat kesalahan yang rendah.
 
-3. **Recall**:
-   - Recall mengukur seberapa banyak dari kasus positif yang berhasil diidentifikasi oleh model. Formula untuk recall adalah:
-     
-     $\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}$
-     
-   - Recall yang tinggi berarti model mampu menemukan sebagian besar dari kasus positif.
+### Dampak
+- Model KNN mampu mengidentifikasi dan mengklasifikasikan kondisi mental dengan tingkat akurasi yang tinggi, menjawab kebutuhan untuk membedakan berbagai kondisi mental secara efektif, sehingga problem satement (1) terjawab bahwa model KNN dapat membantu mengidentifikasi jenis gangguan mental pada pasien berdasarkan data gejala.
+- Untuk menjawab problem statement dan mencapai tujuan pada goals 2, digunakan **korelasi matriks** (correlation matrix) untuk menganalisis hubungan antar fitur dalam dataset. Korelasi matriks memberikan pemahaman sejauh mana masing-masing fitur saling berhubungan dan memberikan wawasan tentang fitur mana yang berkontribusi signifikan terhadap model klasifikasi gangguan mental.
 
-4. **F1 Score**:
-   - F1 score adalah harmonic mean dari precision dan recall, memberikan keseimbangan antara keduanya. Formula untuk F1 score adalah:
-     
-     $F1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$
-     
-   - F1 score yang tinggi menunjukkan bahwa model baik dalam mengklasifikasikan kedua kelas dengan seimbang.
+  Dengan melihat korelasi antar fitur, kita dapat:
+  - Mengidentifikasi fitur-fitur yang saling berkaitan kuat (misalnya, memiliki korelasi tinggi) yang bisa memberikan informasi penting untuk model klasifikasi.
+  - Menentukan fitur mana yang mungkin redundan, sehingga bisa dihapus tanpa kehilangan informasi penting, sehingga meningkatkan efisiensi model.
+  - Memahami hubungan negatif atau positif antara fitur tertentu yang dapat mempengaruhi cara model memprediksi kategori gangguan mental (seperti **Bipolar Type-1**, **Bipolar Type-2**, **Depression**, dan **Normal**).
 
-### Hasil Proyek Berdasarkan Metrik Evaluasi
-
-Setelah model KNN dilatih dan diuji, hasil evaluasi menunjukkan metrik yang relevan. Berikut adalah contoh hasil yang mungkin diperoleh (disesuaikan dengan hasil nyata dari proyek):
-
-- **Akurasi**: 0.85 (85%)
-  - Ini menunjukkan bahwa 85% dari semua prediksi yang dibuat oleh model adalah benar, yang merupakan angka yang baik.
-
-- **Precision**: 
-  - Misalnya, untuk kelas "Depresi", precision adalah 0.80, yang menunjukkan bahwa 80% dari semua prediksi "Depresi" adalah benar. Ini menunjukkan model cukup tepat dalam mendeteksi kasus depresi.
-
-- **Recall**: 
-  - Untuk kelas "Depresi", recall adalah 0.75, yang berarti bahwa model berhasil mendeteksi 75% dari semua kasus depresi yang ada. Ini menunjukkan ada 25% dari kasus yang tidak terdeteksi.
-
-- **F1 Score**: 
-  - F1 score untuk kelas "Depresi" adalah 0.77, yang merupakan keseimbangan antara precision dan recall. Nilai ini menunjukkan bahwa model memiliki performa yang baik dalam klasifikasi, meskipun masih ada ruang untuk perbaikan.
-
-Hasil-hasil ini menunjukkan bahwa meskipun model KNN memberikan performa yang baik, masih ada kemungkinan untuk meningkatkan kinerja melalui teknik seperti hyperparameter tuning dan penggunaan algoritma yang lebih kompleks. Mengingat pentingnya deteksi dini gangguan mental, akurasi dan recall yang lebih tinggi akan sangat bermanfaat.
+  Dengan menggunakan korelasi matriks, kita dapat memilih fitur-fitur yang paling relevan dan mengoptimalkan model agar dapat memberikan prediksi yang lebih akurat.
+  
+-  Model ini berhasil mencapai tujuan utama, yaitu mendukung diagnosis awal dari berbagai tipe gangguan mental dengan akurat. Akurasi dan nilai F1-score yang tinggi menunjukkan bahwa model dapat menjadi alat yang andal dalam memberikan hasil yang konsisten.
+- Meskipun model ini sudah memberikan hasil yang baik, tuning parameter lebih lanjut atau penggunaan teknik pemodelan lain di masa mendatang dapat lebih meningkatkan akurasinya, jika diperlukan untuk skala aplikasi yang lebih luas.
 
