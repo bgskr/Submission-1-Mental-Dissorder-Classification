@@ -167,30 +167,30 @@ Dalam proyek ini, metrik evaluasi yang digunakan untuk mengukur kinerja model kl
 
 1. **Akurasi**:
    - Akurasi mengukur proporsi prediksi yang benar dari seluruh prediksi yang dilakukan. Formula untuk menghitung akurasi adalah:
-     \[
-     \text{Akurasi} = \frac{\text{Jumlah Prediksi Benar}}{\text{Total Prediksi}}
-     \]
+     
+     $\text{Akurasi} = \frac{\text{Jumlah Prediksi Benar}}{\text{Total Prediksi}}$
+     
    - Akurasi yang tinggi menunjukkan bahwa model dapat mengklasifikasikan dengan baik, tetapi bisa menyesatkan jika dataset tidak seimbang.
 
 2. **Precision**:
    - Precision mengukur seberapa tepat prediksi positif dari model dibandingkan dengan total prediksi positif. Formula untuk precision adalah:
-     \[
-     \text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
-     \]
+     
+     $\text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}
+     $
    - Precision yang tinggi menunjukkan bahwa sebagian besar prediksi positif adalah benar.
 
 3. **Recall**:
    - Recall mengukur seberapa banyak dari kasus positif yang berhasil diidentifikasi oleh model. Formula untuk recall adalah:
-     \[
-     \text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}
-     \]
+     
+     $\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}$
+     
    - Recall yang tinggi berarti model mampu menemukan sebagian besar dari kasus positif.
 
 4. **F1 Score**:
    - F1 score adalah harmonic mean dari precision dan recall, memberikan keseimbangan antara keduanya. Formula untuk F1 score adalah:
-     \[
-     F1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
-     \]
+     
+     $F1 = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$
+     
    - F1 score yang tinggi menunjukkan bahwa model baik dalam mengklasifikasikan kedua kelas dengan seimbang.
 
 ### Hasil Proyek Berdasarkan Metrik Evaluasi
