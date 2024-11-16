@@ -2,193 +2,188 @@
 
 ## Domain Proyek
 
-**Latar Belakang:**
-Lower back pain (LBP) atau nyeri punggung bawah adalah masalah kesehatan yang umum dan signifikan secara global. Diperkirakan bahwa hingga 80% orang akan mengalami LBP setidaknya sekali dalam hidup mereka, dan nyeri ini sering kali menyebabkan penurunan kualitas hidup serta berdampak pada ekonomi. Menurut laporan dari Organisasi Kesehatan Dunia (WHO), LBP adalah salah satu penyebab utama disabilitas di seluruh dunia dan menjadi alasan utama kehilangan waktu kerja bagi banyak orang dewasa (WHO, 2021). Penelitian lebih lanjut dari National Institutes of Health (NIH) juga menunjukkan bahwa LBP sering dikaitkan dengan kondisi kronis yang membutuhkan pengobatan jangka panjang (NIH, 2022).
+**Latar Belakang:**  
+Diagnosis penyakit berbasis gejala merupakan aspek penting dalam pelayanan kesehatan yang bertujuan untuk mendeteksi dini berbagai kondisi medis. Namun, pendekatan tradisional sering kali bergantung pada pengalaman dokter atau akses ke sumber daya kesehatan yang memadai, yang dapat menjadi tantangan di daerah dengan keterbatasan layanan kesehatan.
 
-Dengan adanya prediksi dini dan penanganan yang tepat, risiko perkembangan LBP menjadi kondisi kronis dapat dikurangi. Teknologi kecerdasan buatan, seperti model prediktif dalam machine learning, berpotensi membantu dalam identifikasi awal faktor risiko dan prediksi LBP berdasarkan gejala pasien dan data kesehatan lainnya.
+Salah satu upaya modern untuk mendukung diagnosis berbasis gejala adalah penggunaan teknologi kecerdasan buatan (AI), khususnya dalam bentuk model prediktif berbasis *machine learning*. Dengan data gejala yang terstruktur, model AI dapat membantu dalam mengidentifikasi potensi penyakit dengan cepat dan akurat, memberikan rekomendasi berbasis data kepada tenaga medis [\[1\]](https://link.springer.com/article/10.1007/s12652-021-03612-z). 
 
-**Mengapa Masalah Ini Penting Diselesaikan:**
-Biaya kesehatan dan ketidakhadiran di tempat kerja yang diakibatkan oleh LBP sangat besar, tidak hanya bagi individu tetapi juga bagi perusahaan dan sistem kesehatan. Mengingat tingginya prevalensi LBP, alat prediksi yang dapat mengidentifikasi risiko LBP pada tahap awal akan memberikan manfaat besar. Ini tidak hanya meningkatkan kualitas hidup pasien tetapi juga mengurangi biaya perawatan kesehatan. Selain itu, pendekatan prediktif dapat membantu dalam menyediakan perawatan preventif yang lebih tepat sasaran, seperti program latihan punggung atau terapi fisik, yang dapat mengurangi insiden LBP secara keseluruhan.
+Dataset *"Disease and Symptoms"* yang digunakan dalam proyek ini mencakup data gejala berbagai penyakit dan memungkinkan pengembangan model klasifikasi yang mampu memberikan prediksi penyakit berdasarkan data gejala pasien. Pendekatan ini mendukung diagnosis lebih cepat dan berpotensi mengurangi risiko kesalahan diagnosis [\[1\]](https://link.springer.com/article/10.1007/s12652-021-03612-z).
 
-**Referensi Riset:**
-- World Health Organization (WHO). (2021). Low back pain fact sheet. Diakses dari [WHO official website](https://www.who.int/news-room/fact-sheets/detail/depression](https://www.who.int/news-room/fact-sheets/detail/low-back-pain)).
-  
-- National Institutes of Health (NIH). (2022). Low back pain and its chronic implications. Diakses dari [NIMH Information](https://www.nimh.nih.gov/health/statistics/mental-illness.shtml](https://www.nih.gov/news-events/news-releases/low-back-pain-its-chronic-implications)).
-- 
-Dengan pendekatan berbasis data menggunakan *dataset Lower Back Pain Symptoms* dari Kaggle, proyek ini bertujuan untuk mengembangkan model klasifikasi yang mampu mengidentifikasi jenis gangguan terkait nyeri punggung bawah berdasarkan data gejala pasien.
+**Mengapa Masalah Ini Penting Diselesaikan:**  
+Keterbatasan akses terhadap layanan medis yang memadai dan meningkatnya kebutuhan diagnosis dini merupakan tantangan yang signifikan dalam bidang kesehatan. Dengan solusi berbasis AI, model prediktif dapat:  
+1. **Meningkatkan Efisiensi:** Membantu tenaga medis mendiagnosis penyakit dengan lebih cepat [\[1\]](https://link.springer.com/article/10.1007/s12652-021-03612-z).  
+2. **Meningkatkan Aksesibilitas:** Memberikan dukungan diagnosis di daerah dengan akses terbatas terhadap dokter spesialis.  
+3. **Meningkatkan Akurasi:** Mengurangi risiko kesalahan dalam diagnosis berbasis gejala [\[1\]](https://link.springer.com/article/10.1007/s12652-021-03612-z).
+
+Pendekatan ini memberikan manfaat langsung baik untuk pasien maupun tenaga medis, serta membantu dalam pengembangan sistem kesehatan yang lebih responsif dan berbasis data.
+
+**Referensi Riset:**  
+[1] Y. Kumar, A. Koul, R. Singla, dan M. F. Ijaz, "Artificial intelligence in disease diagnosis: a systematic literature review, synthesizing framework and future research agenda," *Journal of Ambient Intelligence and Humanized Computing*, 2021. [\[Online\]](https://link.springer.com/article/10.1007/s12652-021-03612-z). Tersedia: https://link.springer.com/article/10.1007/s12652-021-03612-z
+
+Dengan penggunaan *Disease and Symptoms Dataset*, proyek ini bertujuan untuk mengembangkan model klasifikasi yang mampu mengidentifikasi berbagai penyakit berdasarkan data gejala pasien, sehingga mendukung diagnosis dini dan pengambilan keputusan medis yang lebih baik.  
 
 ## Business Understanding
 
 ### Problem Statements
 
-Proyek ini bertujuan untuk mengembangkan model prediktif guna mendeteksi risiko Lower Back Pain (LBP) pada pasien berdasarkan data gejala. Berikut adalah beberapa pernyataan masalah utama:
+Proyek ini bertujuan untuk mengembangkan model prediktif guna mengidentifikasi penyakit berdasarkan data gejala pasien. Berikut adalah beberapa pernyataan masalah utama:
 
-1. **Pernyataan Masalah 1**: Bagaimana model dapat membantu mengidentifikasi pasien yang berisiko mengalami LBP berdasarkan data gejala yang tersedia?
+1. **Pernyataan Masalah 1**: Bagaimana model prediktif dapat membantu mengidentifikasi jenis penyakit berdasarkan data gejala yang tersedia secara akurat?  
    
-2. **Pernyataan Masalah 2**: Apa saja faktor atau gejala utama yang paling signifikan dalam menentukan risiko LBP pada pasien?
+2. **Pernyataan Masalah 2**: Model mana yang terbaik diantara model berikut, KNN, XGBoost, dan RandomForest dalam mengidentifikasi jenis penyakit berdasarkan data gejala yang tersedia?
 
 ### Goals
+1. Mengembangkan model prediktif yang dapat mengidentifikasi jenis penyakit berdasarkan data gejala pasien secara akurat. Model ini akan digunakan untuk membantu proses diagnosis awal dengan hasil yang dapat diandalkan.  
+2. Membandingkan performa model **KNN**, **XGBoost**, dan **Random Forest** untuk menentukan model terbaik dalam mengklasifikasikan jenis penyakit berdasarkan data gejala pasien.  
 
-Tujuan dari pernyataan masalah di atas adalah sebagai berikut:
+### Solution Statement
+Untuk mencapai tujuan proyek, dilakukan langkah-langkah berikut:  
+1. Menggunakan dataset **Diagnosis and Symptoms Dataset** yang berisi data gejala pasien untuk membangun model prediktif. Dataset ini akan dibersihkan dan diproses untuk memastikan kualitas data yang baik sebelum digunakan untuk pemodelan.  
+2. Melakukan eksplorasi awal data untuk memahami pola hubungan antar fitur dan kontribusinya terhadap klasifikasi jenis penyakit. Analisis ini melibatkan penggunaan korelasi matriks untuk mengidentifikasi fitur penting dan mengeliminasi fitur yang tidak relevan.  
+3. Mengimplementasikan tiga algoritma pembelajaran mesin, yaitu **KNN**, **XGBoost**, dan **Random Forest**, untuk membangun model prediktif.  
+4. Melakukan evaluasi performa setiap model menggunakan metrik **akurasi, precision, recall,** dan **F1-score** untuk menentukan model terbaik.  
+5. Menggunakan teknik **hyperparameter tuning** untuk meningkatkan kinerja model yang dipilih, sehingga dapat memberikan hasil yang lebih akurat dalam mengidentifikasi jenis penyakit berdasarkan data gejala.  
+6. Berdasarkan hasil evaluasi, memilih model dengan performa terbaik yang akan dijadikan solusi utama untuk membantu proses diagnosis penyakit.  
+Dengan pendekatan ini, diharapkan model prediktif dapat memberikan hasil yang lebih akurat dan bermanfaat dalam mendukung proses diagnosis dini penyakit berdasarkan gejala pasien, serta memberikan wawasan tambahan bagi tenaga medis.  
 
-- **Jawaban Pernyataan Masalah 1**: Membangun model prediktif yang dapat mendeteksi risiko LBP dengan tingkat akurasi tinggi menggunakan data gejala dari pasien.
-  
-- **Jawaban Pernyataan Masalah 2**: Mengidentifikasi faktor-faktor atau gejala yang memiliki pengaruh terbesar dalam penentuan risiko LBP, sehingga dapat memberikan wawasan tambahan bagi tenaga medis.
+## Data Understanding  
 
-### Solution Statements
+Dataset yang digunakan adalah [**Disease and Symptoms Dataset**](https://www.kaggle.com/datasets/choongqianzheng/disease-and-symptoms-dataset) yang bersumber dari [Kaggle](https://www.kaggle.com/datasets/choongqianzheng/disease-and-symptoms-dataset), yang terdiri dari **800+ penyakit unik** dengan **600 gejala berbeda** yang dikelompokkan dalam **18 kolom**. Setiap penyakit memiliki jumlah gejala yang bervariasi, dengan kolom kosong (null) jika suatu gejala tidak relevan untuk penyakit tertentu. Dataset ini tersedia dalam format **CSV** dan dirancang untuk membantu mengidentifikasi dan mengklasifikasi penyakit berdasarkan gejala yang diamati.  
 
-Untuk mencapai tujuan di atas, langkah-langkah solusi yang diambil meliputi:
+### Informasi Data  
 
-1. **Solusi 1**: Menggunakan algoritma K-Nearest Neighbors (KNN) dengan n_neighbors=3 sebagai model utama untuk klasifikasi risiko LBP. Algoritma ini dipilih karena kemampuannya dalam menangani data dengan berbagai fitur dan kesederhanaannya dalam implementasi.
+Dataset terdiri dari kolom-kolom berikut:  
 
-2. **Solusi 2**: Meningkatkan kualitas dan representasi data melalui augmentasi dan teknik SMOTE untuk menyeimbangkan distribusi data antar kelas. Dengan data yang lebih seimbang, diharapkan model dapat mengenali pola pada masing-masing kelas secara lebih akurat.
+1. **Disease**: Nama penyakit yang menjadi target analisis dan prediksi.  
+2. **Symptom_1 hingga Symptom_17**:  
+   - Kolom ini mewakili gejala-gejala terkait setiap penyakit, dengan gejala pertama hingga gejala ketujuh belas diurutkan berdasarkan relevansi.  
+   - Jika suatu penyakit memiliki jumlah gejala lebih sedikit, kolom yang tersisa akan berisi nilai kosong (null).  
 
-Dengan langkah-langkah ini, diharapkan model prediktif yang dikembangkan dapat membantu mendeteksi risiko LBP secara lebih efektif, mendukung pengambilan keputusan klinis, dan memberikan kontribusi yang berarti dalam pencegahan LBP bagi masyarakat luas.
+### Kondisi Data  
 
-## Data Understanding
-
-Dataset ini berisi data dari **310 observasi** yang terdiri dari **13 gejala esensial** dengan **12 Gejala, bertipe Numerik** dan **1 Label bertipe Obect** kemudian menentukan k data ini akan mengidentifikasi seseorang yang abnormal atau normal menggunakan data/detail tulang belakang fisik yang dikumpulkan. Dataset ini tersedia dalam format **CSV** dan dapat diakses melalui [Kaggle](https://www.kaggle.com/datasets/sammy123/lower-back-pain-symptoms-dataset).
-
-Nyeri punggung bawah dapat disebabkan oleh berbagai masalah pada bagian mana pun dari jaringan otot, saraf, tulang, cakram, atau tendon tulang belakang yang kompleks dan saling berhubungan di tulang belakang lumbar. Sumber nyeri punggung bawah yang umum meliputi:
-
-*   Akar saraf besar di punggung bawah yang menuju ke kaki mungkin teriritasi
-*   Saraf yang lebih kecil yang mensuplai punggung bawah mungkin teriritasi
-*   Otot punggung bawah berpasangan yang besar (erector spinae) mungkin tegang
-*   Tulang, ligamen, atau sendi mungkin rusak
-*   Cakram intervertebralis mungkin mengalami degenerasi
-
-Iritasi atau masalah pada salah satu struktur ini dapat menyebabkan nyeri punggung bawah dan/atau nyeri yang menjalar atau dirujuk ke bagian tubuh lainnya. Banyak masalah punggung bawah juga menyebabkan kejang otot punggung, yang kedengarannya tidak terlalu parah tetapi dapat menyebabkan nyeri parah dan kecacatan.
-
-Meskipun nyeri punggung bawah sangat umum, gejala dan tingkat keparahan nyeri punggung bawah sangat bervariasi. Ketegangan otot punggung bawah yang sederhana mungkin cukup menyiksa hingga memerlukan kunjungan ke ruang gawat darurat, sementara degenerasi diskus mungkin hanya menyebabkan ketidaknyamanan ringan dan berkala.
-
-### Informasi Data
-
-1. **Pelvic Incidence**: Ukuran sudut yang terbentuk antara garis vertikal tubuh dengan garis yang menghubungkan pusat panggul dan dasar tulang belakang. Sudut ini penting dalam memahami keseimbangan postural seseorang.
-
-2. **Pelvic Tilt**: Menggambarkan sudut kemiringan panggul terhadap sumbu tubuh. Sudut ini bisa memberikan indikasi tentang postur tubuh dan potensi masalah pada tulang belakang bagian bawah.
-
-3. **Lumbar Lordosis Angle**: Mengukur sudut lordosis (lengkungan alami ke dalam) pada tulang belakang lumbar atau bagian bawah punggung. Sudut yang tidak normal dapat menjadi indikasi adanya masalah postur atau kondisi kesehatan lainnya.
-
-4. **Sacral Slope**: Menggambarkan sudut kemiringan sakrum (tulang di dasar tulang belakang). Nilai dari sakral slope berhubungan erat dengan sudut lain pada panggul dan berperan dalam postur tubuh secara keseluruhan.
-
-5. **Pelvic Radius**: Jarak atau radius dari panggul yang dapat memberikan informasi tentang anatomi panggul seseorang. Ukuran ini bisa digunakan dalam analisis keseimbangan panggul.
-
-6. **Degree Spondylolisthesis**: Menunjukkan derajat perpindahan vertebra (tulang belakang) akibat kondisi spondylolisthesis. Ini adalah kondisi di mana salah satu vertebra tergelincir ke depan dari vertebra di bawahnya, yang dapat menyebabkan nyeri dan masalah pada punggung.
-
-7. **Pelvic Slope**: Menggambarkan sudut kemiringan panggul. Ini adalah ukuran tambahan yang mendukung analisis sudut lainnya pada panggul dan sakrum.
-
-8. **Direct Tilt**: Menunjukkan sudut kemiringan langsung dari panggul, yang juga berguna dalam penilaian postural secara keseluruhan.
-
-9. **Thoracic Slope**: Mengukur kemiringan pada tulang belakang bagian atas atau toraks. Ini dapat memberikan gambaran tentang postur dan potensi kelainan pada area punggung atas.
-
-10. **Cervical Tilt**: Menggambarkan sudut kemiringan pada tulang belakang serviks atau leher. Sudut ini dapat berhubungan dengan postur leher dan potensi ketegangan atau ketidakseimbangan di daerah leher.
-
-11. **Sacrum Angle**: Menunjukkan sudut sakrum, yang penting dalam analisis keseimbangan postural serta hubungan antara panggul dan tulang belakang.
-
-12. **Scoliosis Slope**: Mengukur kemiringan pada tulang belakang yang terkait dengan skoliosis, yaitu kelainan pada tulang belakang yang ditandai dengan lengkungan lateral.
-
-13. **Normality**: Kolom ini adalah variabel target yang menunjukkan apakah kondisi tulang belakang pasien dalam keadaan normal atau mengalami abnormalitas. Nilai dari kolom ini akan digunakan dalam analisis prediktif untuk menentukan klasifikasi kesehatan tulang belakang pasien.
-
-Kolom 1-12 memiliki tipe data float dengan masing-masing kolom memiliki nilai minimum dan maximumnya. Kemudian kolom 'Normality' merupakan label dengan dua nilai yaitu 'Abnormal' dan 'Normal'
-
-Setiap fitur ini dirancang untuk memberikan informasi detail tentang struktur dan keseimbangan tulang belakang dan panggul, yang merupakan faktor penting dalam penilaian kesehatan punggung serta postur pasien.
-
-### Kondisi Data
-Dataset ini tidak mengandung **nilai hilang** atau **nilai duplikat**, sehingga dapat langsung digunakan dalam analisis. Namun, dengan jumlah yang begitu sedikit,perlu ditambahkan proses augmentasi untuk memperkaya variasi data pelatihan sehingga mampu meningkatkan performa model yang dibuat.
+1. **Jumlah Data**:  
+   - Dataset ini berisi total **800+ observasi** dan **18 kolom**, termasuk kolom gejala dan label target (Disease).  
+   - Terdapat nilai kosong di kolom **Symptom_4 hingga Symptom_17** dengan tren peningkatan jumlah nilai kosong tersebut
 
 ## Data Preparation
 
-Pada bagian ini, beberapa teknik data preparation diterapkan untuk memastikan data siap digunakan dalam model machine learning. Tahapan yang dilakukan meliputi:
+Pada bagian ini, beberapa teknik *data preparation* diterapkan untuk memastikan data siap digunakan dalam proses pelatihan model *machine learning*. Tahapan yang dilakukan meliputi:
 
-1. **Penghapusan Kolom yang Tidak Relevan**:
-   - Menghapus kolom **Unnamed: 13** karena kolom ini tidak memberikan informasi yang relevan untuk analisis dan hanya berfungsi sebagai identifikasi unik. Menghapus fitur yang tidak diperlukan dapat membantu mengurangi kompleksitas model dan meningkatkan performa.
+### 1. **Pemilihan Kolom yang Relevan**  
+Dataset awal memiliki **18 kolom**, yang mencakup label target (*Disease*) dan 17 kolom gejala (*Symptom_1* hingga *Symptom_17*). Namun, untuk menyederhanakan analisis dan mengurangi kompleksitas model, hanya **3 kolom gejala pertama** (*Symptom_1*, *Symptom_2*, *Symptom_3*) beserta kolom **Disease** yang dipilih untuk digunakan pada tahap berikutnya.  
 
-2. **Mengganti Nama Kolom**
-   - Nama kolom diubah ke format `snake_case` untuk konsistensi dan mempermudah akses data. Proses penggantian dilakukan dengan menggunakan fungsi `replace` untuk mengganti simbol-simbol atau spasi dengan tanda underscore (`_`). Misalnya, kolom dengan nama `Sleep Disorder` diubah menjadi `sleep_disorder`. Langkah ini meningkatkan keterbacaan dan menjaga format penamaan agar lebih sesuai dengan standar Python.
+Alasan memilih hanya kolom tersebut:  
+- Gejala awal biasanya lebih dominan dalam mendiagnosis penyakit.  
+- Mengurangi dimensi data untuk mempercepat pelatihan model.  
 
-3. **Validasi Nilai kolom hilang atau Null**
-   - Memanfaatkan fungsi .isnull().sum() untuk menghitung nilai kolom yang kosong pada masing-masing kolom. Hasil menunjukkan bahwa tidak ada nilai yang hilang sehingga data dianggap sudah lengkap dan tidak perlu dilakukan pemberihan lagi.
+### 2. **Encoding Label untuk Kolom Kategorikal**  
+Kolom **Disease** (label target) serta kolom gejala (*Symptom_1*, *Symptom_2*, *Symptom_3*) merupakan data berbentuk teks (*categorical*). Data ini perlu diubah menjadi bentuk numerik menggunakan **Label Encoding**, sehingga model dapat memprosesnya dengan baik.  
 
-4. **Mengubah kolom 'Normality' menjadi Numerik**:
-   - Mengubah variabel 'Normality' yang merupakan label dengan nilai 'Abnormal' dan 'Normal' menjadi nilai numerik dengan keterangan berikut. 0 => **Abnormal** || 1 => **Normal**
+Prosesnya adalah sebagai berikut:  
+- **Disease**: Setiap nama penyakit diberi representasi numerik unik.  
+- **Symptom_1 hingga Symptom_3**: Setiap gejala juga diberi nilai numerik berdasarkan kategori unik yang dimiliki.  
 
-5. **Normalisasi atau Standarisasi**:
-   - Menerapkan **StandardScaler** untuk menormalkan fitur numerik. Standarisasi diperlukan agar semua fitur berada pada skala yang sama, yang membantu dalam mempercepat proses pelatihan dan meningkatkan konvergensi model.
+Contoh hasil encoding:  
+| Disease     | Symptom_1       | Symptom_2       | Symptom_3       |  
+|-------------|-----------------|-----------------|-----------------|  
+| Disease_A   | Fever           | Headache        | Nausea          |  
+| Disease_B   | Fatigue         | Chills          | None            |  
 
-6. **Augmentasi Data**:
-   - Menerapkan teknik **SMOTE (Synthetic Minority Over-sampling Technique)** untuk menyeimbangkan kelas pada target variabel. Ini penting dilakukan mengingat dataset awal memiliki ketidakseimbangan kelas yang signifikan, yang dapat menyebabkan model bias. Dengan augmentasi, kita mendapatkan dataset yang lebih seimbang yang dapat meningkatkan akurasi model
-    
-7. **Pembagian Data**:
-   - Dataset dibagi menjadi dua bagian: training set (80%) dan test set (20%) menggunakan metode **train_test_split**. Pembagian ini penting untuk menguji kinerja model setelah dilatih.
-     
-### Alasan Perlunya Tahapan Data Preparation
+Setelah encoding:  
+| Disease | Symptom_1 | Symptom_2 | Symptom_3 |  
+|---------|-----------|-----------|-----------|  
+| 0       | 1         | 2         | 3         |  
+| 1       | 4         | 5         | 0         |  
 
-Proses data preparation sangat penting dalam pengembangan model machine learning karena:
+### 3. **Imputasi untuk Mengisi Nilai Kosong**  
+Nilai kosong (*null*) ditemukan pada beberapa kolom gejala, terutama jika suatu penyakit hanya memiliki sedikit gejala. Nilai kosong ini diisi menggunakan metode **KNN Imputation**, yang memperkirakan nilai berdasarkan kedekatan data lain yang serupa.  
 
-- **Meningkatkan Kualitas Data**: Memastikan bahwa data bersih, konsisten, dan relevan, yang sangat mempengaruhi performa model.
-- **Menghindari Kesalahan dalam Pelatihan**: Dengan menyiapkan data yang valid, model dapat dilatih dengan baik tanpa risiko mengalami error saat pelatihan.
-- **Memudahkan Proses Pelatihan**: Dengan menormalkan data dan mereduksi dimensi, model dapat belajar lebih cepat dan lebih efektif.
-- **Meningkatkan Akurasi Model**: Dengan menyeimbangkan kelas dan mempersiapkan data dengan benar, model cenderung memberikan hasil yang lebih akurat dan dapat diandalkan dalam prediksi.
+Langkah-langkah imputasi:  
+- Mengidentifikasi kolom dengan nilai kosong menggunakan `.isnull().sum()`.  
+- Menggunakan algoritma KNN untuk mengisi nilai kosong berdasarkan pola pada data tetangga terdekat.  
 
-Melalui tahapan ini, kita dapat memastikan bahwa data yang digunakan dalam model machine learning siap untuk dianalisis dan menghasilkan prediksi yang akurat.
+### 4. **Pembagian Data**  
+Setelah proses *data preparation*, dataset dibagi menjadi dua bagian:  
+- **Training set (80%)**: Digunakan untuk melatih model.  
+- **Test set (20%)**: Digunakan untuk menguji performa model.  
 
-## Model Development
+Metode **train_test_split** dari pustaka Scikit-learn digunakan untuk membagi data secara acak, memastikan distribusi label yang seimbang pada kedua bagian.
 
-Pada tahap ini, model K-Nearest Neighbors (KNN) digunakan untuk klasifikasi data mental illness. KNN bekerja dengan menentukan jarak antara data baru dan titik data yang ada dalam dataset pelatihan, lalu menentukan kelas dari data baru berdasarkan mayoritas kelas dari tetangga terdekatnya. 
+### Alasan Perlunya Tahapan Data Preparation  
 
-Model ini dikonfigurasi dengan parameter `n_neighbors=1`, artinya model mempertimbangkan tiga tetangga terdekat saat menentukan kelas untuk data baru. Setelah pelatihan model pada dataset `X_train` dan `y_train`, model ini dievaluasi pada `X_test`, dan hasil prediksi dibandingkan dengan nilai asli (`y_test`) untuk menghitung akurasi dan laporan klasifikasi yang mencakup metrik seperti precision, recall, dan F1-score.
+Proses *data preparation* sangat penting karena:  
+1. **Meningkatkan Kualitas Data**: Memastikan data relevan, konsisten, dan bebas dari nilai kosong.  
+2. **Memudahkan Proses Pelatihan**: Dengan mengurangi kompleksitas dan mengatur skala data, pelatihan model menjadi lebih cepat.  
+3. **Menghindari Kesalahan dalam Pelatihan**: Data yang tidak bersih dapat menyebabkan error selama proses pelatihan.  
+4. **Meningkatkan Akurasi Model**: Data yang diproses dengan baik akan membantu model memberikan hasil prediksi yang lebih akurat dan andal.
 
-### Alur Kerja Model KNN
+Melalui tahapan ini, dataset yang digunakan telah disiapkan untuk diolah oleh model *machine learning*, memastikan prediksi yang lebih baik dan akurat.  
 
-1. **Pengukuran Jarak:** Menghitung jarak antara data uji dan setiap titik data pelatihan.
-2. **Pemilihan Tetangga Terdekat:** Memilih tiga titik data terdekat (berdasarkan `n_neighbors=1`).
-3. **Klasifikasi Berdasarkan Mayoritas:** Menentukan kelas data baru berdasarkan kelas mayoritas dari tiga tetangga terdekat.
+## Pengembangan Model
 
-Dengan pendekatan ini, KNN mampu mengklasifikasikan tipe-tipe mental illness pada dataset ini secara efektif, meskipun akurasi dan performa model tetap bergantung pada distribusi dan kualitas data pelatihan yang tersedia.
-### Kelebihan dan Kekurangan KNN
+Pada fase ini, tiga model dikembangkan dan dibandingkan untuk mengklasifikasikan data penyakit mental berdasarkan gejala yang tersedia: **K-Nearest Neighbors (KNN)**, **XGBoost Classifier (XGBClassifier)**, dan **Random Forest Classifier (RFC)**. Setiap model disetel menggunakan **GridSearchCV** untuk menemukan hiperparameter yang optimal.
 
-**Kelebihan**:
-- **Sederhana dan Mudah Dipahami**: KNN adalah algoritma yang mudah untuk diimplementasikan dan diinterpretasikan.
-- **Tanpa Pelatihan Terlebih Dahulu**: Model KNN tidak memerlukan pelatihan yang panjang; proses prediksi dilakukan langsung dengan menghitung jarak.
-- **Adaptif terhadap Data Baru**: Model KNN dapat dengan cepat beradaptasi terhadap data baru tanpa memerlukan retraining yang mahal.
+### Tinjauan Model dan Penyelarasan Hyperparameter
 
-**Kekurangan**:
-- **Waktu Prediksi yang Lambat**: KNN membutuhkan waktu yang lebih lama untuk melakukan prediksi, terutama jika dataset besar, karena harus menghitung jarak ke setiap titik data dalam training set.
-- **Sensitif terhadap Skala Data**: KNN memerlukan data yang dinormalisasi atau distandarisasi, karena pengaruh fitur dengan skala yang berbeda bisa mendistorsi hasil.
-- **Cenderung Terpengaruh oleh Noise**: Jika terdapat data outlier atau noise dalam dataset, KNN dapat memberikan hasil yang tidak akurat.
+1. **KNN (K-Nearest Neighbors)**  
+   - **Deskripsi**: KNN mengklasifikasikan data dengan menghitung jarak antara titik data baru dan data pelatihan, kemudian menetapkan kelas berdasarkan kelas mayoritas dari tetangga terdekat.
+   - **Penyelarasan Parameter**: Parameter `n_neighbors` disetel dengan nilai [3, 5, 7, 9].
 
-### Model Terbaik
+2. **XGBoost Classifier**  
+   - **Deskripsi**: XGBoost adalah algoritma boosting yang membangun ensemble dari pohon keputusan untuk meningkatkan kinerja model.
+   - **Penyelarasan Parameter**: Parameter berikut disetel:
+     - `learning_rate`: [0.01, 0.1, 0.2]
+     - `n_estimators`: [100, 200, 300]
+     - `max_depth`: [3, 4, 5]
 
-Mengingat bahwa hanya satu algoritma yang digunakan dalam proyek ini, yaitu KNN, model ini akan menjadi model terbaik berdasarkan hasil evaluasi yang dilakukan. Model ini dipilih karena performanya yang baik dalam mengklasifikasikan data gangguan mental setelah diterapkan teknik augmentasi dan standarisasi, meskipun mungkin ada potensi untuk peningkatan lebih lanjut melalui teknik tuning yang tidak dilakukan dalam proyek ini.
+3. **Random Forest Classifier**  
+   - **Deskripsi**: RFC adalah metode ensemble yang membangun beberapa pohon keputusan dan merata-rata prediksinya untuk meningkatkan akurasi dan mengurangi overfitting.
+   - **Penyelarasan Parameter**: Parameter berikut disetel:
+     - `n_estimators`: [100, 200, 300]
+     - `max_depth`: [None, 5, 10]
+     - `min_samples_split`: [2, 5, 10]
+
+### Pemilihan Model Terbaik
+
+Berdasarkan hasil evaluasi, baik **XGBoost** dan **Random Forest** mencapai akurasi tertinggi (94.92%), presisi (96.98%), recall (94.92%), dan F1-score (94.17%). Namun, **XGBoost** memiliki keunggulan dalam hal penyelarasan parameter, karena membutuhkan lebih sedikit pohon (100) dibandingkan dengan Random Forest (yang juga menggunakan 100 pohon tetapi dengan konfigurasi yang berbeda).
+
+Oleh karena itu, **XGBoost Classifier** dipilih sebagai model terbaik karena kinerjanya yang sedikit lebih tinggi dan konfigurasi parameter yang lebih efisien.
+
+### Kesimpulan
+
+Melalui penggunaan **GridSearchCV**, tiga model dievaluasi dan dibandingkan kemampuannya untuk mengklasifikasikan penyakit berdasarkan dataset yang tersedia. **XGBoost Classifier** berkinerja terbaik, menawarkan akurasi, presisi, recall, dan F1-score tertinggi. Model ini dipilih sebagai model akhir untuk diterapkan, memberikan solusi yang andal untuk mengklasifikasikan penyakit berdasarkan data gejala.
 
 ## Evaluation
 
-Pada tahap evaluasi model K-Nearest Neighbors (KNN), model menghasilkan **akurasi sebesar 93%** dalam mengklasifikasikan kondisi seseorang **Abnormal** atau **Normal** menggunakan data/detail tulang belakang fisik. Berikut adalah hasil evaluasi model secara rinci:
+Setelah mengevaluasi ketiga model, berikut adalah ringkasan kinerjanya:
 
-| Kelas           | Precision | Recall | F1-score | Support |
-|-----------------|-----------|--------|----------|---------|
-| Abnormal        | 1.00      | 0.87   | 0.93     | 55      |
-| Normal          | 0.87      | 1.00   | 0.93     | 45      |
-
-**Accuracy keseluruhan:** 0.93  
-**Macro average:** Precision = 0.93, Recall = 0.94, F1-score = 0.93  
-**Weighted average:** Precision = 0.94, Recall = 0.93, F1-score = 0.93  
+| Model                | Akurasi  | Presisi  | Recall  | F1-Score | Parameter Terbaik                                                                |
+|----------------------|----------|----------|---------|----------|----------------------------------------------------------------------------------|
+| **KNN**              | 94.41%   | 96.63%   | 94.41%  | 93.68%   | `{'n_neighbors': 3}`                                                             |
+| **XGBoost**          | 94.92%   | 96.98%   | 94.92%  | 94.17%   | `{'learning_rate': 0.1, 'max_depth': 3, 'n_estimators': 100}`                   |
+| **Random Forest**    | 94.92%   | 96.98%   | 94.92%  | 94.17%   | `{'max_depth': None, 'min_samples_split': 10, 'n_estimators': 100}`             |
 
 ### Analisis Metrik Evaluasi
 - **Precision** menunjukkan akurasi model dalam memprediksi tiap kategori dengan benar. Model memberikan nilai precision yang tinggi pada semua kelas, yang berarti kesalahan prediksi pada tiap kelas cukup minim.
-- **Recall** mengukur sensitivitas model dalam mendeteksi setiap kelas. Pada kelas **Abnormal**, recall mencapai 1.00, yang berarti model mampu mengenali setiap instance di kelas tersebut dengan sempurna.
+- **Recall** mengukur sensitivitas model dalam mendeteksi setiap kelas.
 - **F1-score** memberikan keseimbangan antara precision dan recall. Nilai yang tinggi pada semua kelas menunjukkan bahwa model ini efektif dalam mendeteksi kasus dengan tingkat kesalahan yang rendah.
 
-### Dampak
-- Model KNN mampu mengidentifikasi dan mengklasifikasikan kondisi fisik tulang belakang dengan tingkat akurasi yang tinggi, menjawab kebutuhan untuk membedakan apakah kondisi tulang belakang orang tersebut normal atau tidak secara efektif, sehingga problem satement (1) terjawab bahwa model KNN dapat membantu mengidentifikasi resiko gangguan LBP berdasarkan data gejala yang tersedia
-- Untuk menjawab problem statement dan mencapai tujuan pada goals 2, digunakan **korelasi matriks** (correlation matrix) untuk menganalisis hubungan antar fitur dalam dataset. Korelasi matriks memberikan pemahaman sejauh mana masing-masing fitur saling berhubungan dan memberikan wawasan tentang fitur mana yang berkontribusi signifikan terhadap model klasifikasi resiko LBP.
+### Dampak  
+Hasil dari proyek ini memberikan dampak yang signifikan, terutama dalam meningkatkan efisiensi dan akurasi diagnosis penyakit berdasarkan data gejala pasien. Berikut adalah dampaknya:  
 
-  Dengan melihat korelasi antar fitur, kita dapat:
-  - Mengidentifikasi fitur-fitur yang saling berkaitan kuat (misalnya, memiliki korelasi tinggi) yang bisa memberikan informasi penting untuk model klasifikasi.
-  - Menentukan fitur mana yang mungkin redundan, sehingga bisa dihapus tanpa kehilangan informasi penting, sehingga meningkatkan efisiensi model.
-  - Memahami hubungan negatif atau positif antara fitur tertentu yang dapat mempengaruhi cara model memprediksi kategori yang tersedia.
-  Dengan menggunakan korelasi matriks, kita dapat memilih fitur-fitur yang paling relevan dan mengoptimalkan model agar dapat memberikan prediksi yang lebih akurat.
-  
--  Model ini berhasil mencapai tujuan utama, yaitu mendukung identifikasi resiko seseorang mengalami *Lower Back Pain* secara akurat. Akurasi dan nilai F1-score yang tinggi menunjukkan bahwa model dapat menjadi alat yang andal dalam memberikan hasil yang konsisten.
-- Meskipun model ini sudah memberikan hasil yang baik, tuning parameter lebih lanjut atau penggunaan teknik pemodelan lain di masa mendatang dapat lebih meningkatkan akurasinya, jika diperlukan untuk skala aplikasi yang lebih luas.
+1. **Mendukung proses diagnosis awal yang lebih akurat**  
+   - Dengan model prediktif yang dibangun, proses diagnosis dapat dilakukan dengan lebih cepat dan akurat. Hal ini membantu tenaga medis untuk mengidentifikasi jenis penyakit pasien berdasarkan data gejala awal yang tersedia.  
+   - Untuk **Pernyataan Masalah 1**, model prediktif yang dihasilkan mampu mengolah data gejala pasien dan memberikan prediksi dengan tingkat akurasi yang tinggi. Hal ini memberikan nilai tambah pada sistem kesehatan dalam memanfaatkan teknologi prediktif.  
 
+2. **Pemilihan model terbaik untuk membantu pengambilan keputusan**  
+   - Dalam menjawab **Pernyataan Masalah 2**, evaluasi model menunjukkan bahwa model **XGBoost** memberikan performa terbaik dengan nilai **akurasi, precision, recall,** dan **F1-score** tertinggi. Pemilihan model ini sebagai solusi utama memberikan keyakinan bahwa hasil prediksi yang dihasilkan dapat diandalkan.  
+   - Dengan membandingkan tiga model (KNN, XGBoost, dan Random Forest), hasil proyek juga memberikan wawasan bagi pengembang atau pengguna sistem tentang kekuatan dan kelemahan masing-masing algoritma, yang dapat menjadi dasar untuk pengembangan lebih lanjut.  
+
+3. **Peningkatan efisiensi dalam analisis data gejala pasien**  
+   - Penggunaan korelasi matriks dalam proses eksplorasi data memberikan pemahaman lebih mendalam tentang hubungan antar fitur gejala. Hasil ini memungkinkan pengurangan dimensi data tanpa kehilangan informasi penting, sehingga proses analisis menjadi lebih cepat dan efisien.  
+
+4. **Kontribusi terhadap sistem kesehatan berbasis data**  
+   - Model ini dapat diintegrasikan ke dalam sistem kesehatan berbasis data untuk mendukung tenaga medis dalam pengambilan keputusan. Dampaknya mencakup peningkatan kepercayaan terhadap teknologi prediktif dalam bidang kesehatan, terutama dalam membantu diagnosis penyakit secara efisien.  
+
+5. **Dasar untuk pengembangan di masa depan**  
+   - Meskipun model saat ini sudah memberikan hasil yang baik, proyek ini membuka peluang untuk pengembangan lebih lanjut, seperti menambahkan data baru, menggunakan algoritma lain, atau mengaplikasikan model ini ke dataset yang lebih luas dan beragam untuk mendukung aplikasi di skala yang lebih besar.  
