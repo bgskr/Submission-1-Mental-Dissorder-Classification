@@ -104,95 +104,97 @@ Hal ini dilakukan untuk memastikan model dapat belajar lebih efektif dari skala 
 
 Pada proyek ini, digunakan pendekatan _embedding_ untuk membuat sistem rekomendasi. Model memanfaatkan jaringan saraf buatan (_neural network_) yang dirancang untuk mempelajari representasi laten (_latent representation_) dari pengguna dan buku berdasarkan data rating. Berikut penjelasan komponen model:
 
-1.  **Input Layer**  
-    Model memiliki satu _input layer_ dengan dua kolom:
-    
-    -   Kolom pertama adalah ID pengguna (user).
-    -   Kolom kedua adalah ID buku (book).  
-        Input layer diberi nama `user_book_input` dengan ukuran `(2,)`, yang berarti model menerima array berdimensi dua (user dan book) dalam satu input.
-    
-    ```python
-    input_layer = Input(shape=(2,), name='user_book_input')
-    
-    ```
-    
-2.  **Split Input**  
-    Input digabungkan menjadi satu array, sehingga perlu dipisahkan kembali menjadi kolom `user` dan `book` menggunakan lapisan `Lambda`.
-    
-    -   `user_input` mengambil kolom pertama dari array.
-    -   `book_input` mengambil kolom kedua dari array.
-    
-    ```python
-    user_input = Lambda(lambda x: x[:, 0])(input_layer)
-    book_input = Lambda(lambda x: x[:, 1])(input_layer)
-    
-    ```
-    
-3.  **Embedding Layer**
-    
-    -   **User Embedding**: Lapisan `Embedding` digunakan untuk mempelajari representasi vektor laten dari ID pengguna. Dimensi embedding diatur menjadi 50, yang berarti setiap pengguna akan direpresentasikan oleh vektor berdimensi 50.
-    -   **Book Embedding**: Lapisan `Embedding` lain digunakan untuk mempelajari representasi vektor laten dari ID buku dengan dimensi embedding yang sama.  
-        Representasi ini bertujuan untuk menangkap hubungan antar pengguna dan buku dalam ruang laten.
-    
-    ```python
-    user_embedding = Embedding(len_user, 50, name='user_embedding')(user_input)
-    book_embedding = Embedding(len_book, 50, name='book_embedding')(book_input)
-    
-    ```
-    
-4.  **Flatten Layer**  
-    Hasil dari embedding diubah menjadi vektor 1D menggunakan lapisan `Flatten` agar bisa digabungkan dan diproses lebih lanjut dalam model.
-    
-    ```python
-    user_vec = Flatten()(user_embedding)
-    book_vec = Flatten()(book_embedding)
-    
-    ```
-    
-5.  **Concatenate Layer**  
-    Representasi laten dari pengguna dan buku digabungkan menjadi satu vektor menggunakan lapisan `Concatenate`. Ini memungkinkan model untuk mempelajari hubungan antara pengguna dan buku secara simultan.
-    
-    ```python
-    merged = Concatenate()([user_vec, book_vec])
-    
-    ```
-    
-6.  **Dense Layers**
-    
-    -   Lapisan `Dense` dengan 128 unit dan fungsi aktivasi `relu` digunakan untuk memproses representasi gabungan. Lapisan ini membantu model belajar hubungan non-linear antara pengguna dan buku.
-    -   Lapisan output dengan satu unit dan aktivasi `sigmoid` digunakan untuk menghasilkan prediksi nilai rating yang telah dinormalisasi (0 hingga 1).
-    
-    ```python
-    dense = Dense(128, activation='relu')(merged)
-    output = Dense(1, activation='sigmoid')(dense)
-    
-    ```
-    
-7.  **Model Compilation**  
-    Model dikompilasi dengan menggunakan optimizer `adam`, _loss function_ `mean squared error (MSE)`, dan metrik `mean absolute error (MAE)` untuk mengevaluasi performa.
-    
-    ```python
-    model.compile(optimizer='adam', loss='mse', metrics=['mae'])
-    
-    ```
-    
-8.  **Early Stopping**  
-    Digunakan teknik _early stopping_ untuk mencegah overfitting. Model akan berhenti dilatih jika tidak ada peningkatan pada metrik validasi selama 3 epoch berturut-turut.
-    
-    ```python
-    early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
-    
-    ```
-    
-9.  **Data Input untuk Training**  
-    Input data pengguna dan buku digabungkan menjadi satu array 2D sebelum diberikan ke model. Proses pelatihan dilakukan dengan membagi data menjadi 80% untuk pelatihan dan 20% untuk validasi.
-    
-    ```python
-    x_train_combined = np.column_stack((x_train[:, 0], x_train[:, 1]))
-    history = model.fit(x_train_combined, y_train, validation_split=0.2, epochs=20, batch_size=32, callbacks=[early_stopping])
-    
-    ```
-    
+#### **1. Input Layer**
+Model ini dirancang untuk menerima **satu input dengan dua kolom**:
+- Kolom pertama mewakili **user ID**.
+- Kolom kedua mewakili **book ID**.
+
+```python
+input_layer = Input(shape=(2,), name='user_book_input')  # Single input with two columns (user, book)
+```
+
+#### **2. Pemisahan Input**
+Input dipecah menjadi dua bagian menggunakan **Lambda layer**:
+- **User Input**: Mengambil kolom pertama dari input.
+- **Book Input**: Mengambil kolom kedua dari input.
+
+```python
+user_input = Lambda(lambda x: x[:, 0])(input_layer)  # First column: user IDs
+book_input = Lambda(lambda x: x[:, 1])(input_layer)  # Second column: book IDs
+```
+
+#### **3. Embedding Layer**
+- **User Embedding**: Memberikan representasi terlatih untuk user dengan ukuran vektor embedding 50 dan menambahkan regularisasi L2 (`embeddings_regularizer=l2(1e-5)`).
+- **Book Embedding**: Memberikan representasi terlatih untuk book dengan pengaturan yang sama.
+
+```python
+user_embedding = Embedding(len_user, 50, name='user_embedding', embeddings_regularizer=l2(1e-5))(user_input)
+book_embedding = Embedding(len_book, 50, name='book_embedding', embeddings_regularizer=l2(1e-5))(book_input)
+```
+
+Embedding ini kemudian diubah menjadi vektor 1 dimensi menggunakan **Flatten layer**:
+
+```python
+user_vec = Flatten()(user_embedding)
+book_vec = Flatten()(book_embedding)
+```
+
+#### **4. Penggabungan Vektor Embedding**
+Vektor embedding untuk user dan book digabungkan menggunakan **Concatenate layer** untuk menghasilkan representasi gabungan.
+
+```python
+merged = Concatenate()([user_vec, book_vec])
+```
+
+#### **5. Dense Layer**
+- **Dense Layer 1**: Terdiri dari 128 unit dengan aktivasi ReLU dan regularisasi L2 (`kernel_regularizer=l2(0.01)`).
+- **Dropout**: Menerapkan dropout dengan rate 20% untuk mengurangi risiko overfitting.
+
+```python
+dense = Dense(128, activation='relu', kernel_regularizer=l2(0.01))(merged)
+dropout = Dropout(0.2)(dense)
+```
+
+- **Output Layer**: Menghasilkan 1 output dengan aktivasi sigmoid dan regularisasi L2 pada kernel.
+
+```python
+output = Dense(1, activation='sigmoid', kernel_regularizer=l2(0.01))(dropout)
+```
+
+#### **6. Kompilasi Model**
+Model dikompilasi menggunakan **Adam optimizer** dengan **learning rate 1e-3**, fungsi loss Mean Squared Error (MSE), dan metrik Mean Absolute Error (MAE).
+
+```python
+model.compile(optimizer=Adam(learning_rate=1e-3), loss='mse', metrics=['mae'])
+```
+
+#### **7. Callback untuk Early Stopping**
+**EarlyStopping** digunakan untuk menghentikan pelatihan lebih awal jika tidak ada perbaikan pada **val_loss** selama 3 epoch berturut-turut. Model akan mengembalikan bobot terbaiknya.
+
+```python
+early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
+```
+
+#### **8. Penggabungan Data Input**
+User ID dan Book ID digabungkan ke dalam satu array input dua kolom untuk pelatihan dan validasi.
+
+```python
+x_train_combined = np.column_stack((x_train[:, 0], x_train[:, 1]))  # Shape: (num_samples, 2)
+x_test_combined = np.column_stack((x_test[:, 0], x_test[:, 1]))
+```
+
+#### **9. Pelatihan Model**
+Model dilatih dengan **batch size 32** selama maksimum **20 epoch**, dengan validasi dilakukan pada data uji.
+
+```python
+history = model.fit(
+    x_train_combined, y_train, 
+    validation_data=(x_test_combined, y_test), 
+    epochs=20, 
+    batch_size=32, 
+    callbacks=[early_stopping]
+)
+``` 
 
 ### Alasan Pemilihan Model
 
@@ -204,10 +206,10 @@ Model berbasis embedding ini dipilih karena dapat menangkap hubungan kompleks an
 
 Pada tahap evaluasi, metrik **Mean Squared Error (MSE)** dan **Mean Absolute Error (MAE)** digunakan untuk mengukur performa model pada data uji. Berikut hasil evaluasi:
 
--   **Test Loss (MSE):** 0.00856
--   **Test MAE:** 0.02482
+-   **Test Loss (MSE):** 0.14907
+-   **Test MAE:** 0.35938
 
-Hasil ini menunjukkan bahwa model mampu memberikan prediksi yang cukup baik dengan rata-rata kesalahan prediksi sebesar ~0.025 pada skala rating yang telah dinormalisasi.
+Hasil ini menunjukkan bahwa model mampu memberikan prediksi dengan kesalahan rata-rata sebesar ~0.36 pada skala target yang telah dinormalisasi antara 0 dan 1. Dengan nilai MSE yang rendah, model memiliki kinerja yang baik dalam memprediksi rating pada data uji. Namun, analisis tambahan mungkin diperlukan untuk memastikan kinerja model terhadap data baru atau untuk menangani kemungkinan outlier.
 
 ### Learning Curve
 
@@ -216,4 +218,4 @@ Plot berikut menunjukkan perubahan nilai **Loss** (MSE) selama proses pelatihan 
 ![Model loss](https://github.com/bgskr/Submission-1-Mental-Dissorder-Classification/blob/main/plot_eval.png)
 
 **Observasi:**  
-Dari grafik di atas, terlihat bahwa nilai loss pada data pelatihan terus menurun seiring bertambahnya epoch. Namun, pada data validasi, nilai loss cenderung stabil setelah beberapa epoch terakhir, menunjukkan bahwa model tidak mengalami overfitting.
+Dari grafik di atas, terlihat bahwa nilai **loss** pada data pelatihan terus menurun seiring bertambahnya epoch, yang menunjukkan bahwa model berhasil belajar dari data pelatihan. Pada data validasi, nilai **loss** cenderung stabil setelah beberapa epoch terakhir, yang menandakan bahwa model mencapai titik optimal dalam generalisasi tanpa mengalami overfitting. Hal ini juga didukung oleh penggunaan **Early Stopping**, yang membantu menghentikan pelatihan sebelum model mulai kehilangan kemampuan generalisasi pada data validasi.
