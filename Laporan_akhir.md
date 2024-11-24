@@ -215,7 +215,7 @@ Hasil ini menunjukkan bahwa model mampu memberikan prediksi dengan kesalahan rat
 
 Plot berikut menunjukkan perubahan nilai **Loss** (MSE) selama proses pelatihan model pada data pelatihan dan validasi:
 
-![Model loss](https://github.com/bgskr/Submission-1-Mental-Dissorder-Classification/blob/main/plot_eval.png)
+![Model Loss](https://github.com/bgskr/Submission-1-Mental-Dissorder-Classification/blob/main/plot_eval.png)
 
 **Observasi:**  
 Dari grafik di atas, terlihat bahwa nilai **loss** pada data pelatihan terus menurun seiring bertambahnya epoch, yang menunjukkan bahwa model berhasil belajar dari data pelatihan. Pada data validasi, nilai **loss** cenderung stabil setelah beberapa epoch terakhir, yang menandakan bahwa model mencapai titik optimal dalam generalisasi tanpa mengalami overfitting. Hal ini juga didukung oleh penggunaan **Early Stopping**, yang membantu menghentikan pelatihan sebelum model mulai kehilangan kemampuan generalisasi pada data validasi.
