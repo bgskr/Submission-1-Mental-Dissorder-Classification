@@ -213,7 +213,7 @@ Hasil ini menunjukkan bahwa model mampu memberikan prediksi yang cukup baik deng
 
 Plot berikut menunjukkan perubahan nilai **Loss** (MSE) selama proses pelatihan model pada data pelatihan dan validasi:
 
---gambar--
+![Model loss](https://github.com/bgskr/Submission-1-Mental-Dissorder-Classification/blob/main/plot_eval.png)
 
 **Observasi:**  
 Dari grafik di atas, terlihat bahwa nilai loss pada data pelatihan terus menurun seiring bertambahnya epoch. Namun, pada data validasi, nilai loss cenderung stabil setelah beberapa epoch terakhir, menunjukkan bahwa model tidak mengalami overfitting.
