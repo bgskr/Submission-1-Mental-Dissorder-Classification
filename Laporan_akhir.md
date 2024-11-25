@@ -20,19 +20,6 @@ Available at: https://link.springer.com/book/10.1007/978-1-4899-7637-6
 ## Business Understanding
 
 ### Problem Statement
-Proyek ini bertujuan untuk mengembangkan model guna memberikan rekomendasi buku berdasarkan riwayat data buku  yang pernah dibaca oleh _user_. Berikut beberapa pernyataan masalah utama:  
- - Bagaimana cara memberikan rekomendasi buku yang relevan kepada pengguna yang belum pernah memberikan rating atau review terhadap buku yang ada di sistem?
- - Bagaimana meningkatkan akurasi sistem rekomendasi agar dapat menyesuaikan dengan preferensi individu pengguna meskipun terdapat data yang tidak lengkap atau tidak terstruktur?
-
-### Goals
- 1. Mengembangkan sistem rekomendasi menggunakan teknik _collaborative filtering_ dengan pendekatan _item-based_ untuk merekomendasikan buku berdasarkan riwayat pembacaan dari pengguna lain dengan pola yang serupa.
- 2. Meningkatkan personalisasi rekomendasi dengan menggunakan teknik _collaborative filtering_ untuk memperkirakan rating atau preferensi pengguna terhadap buku yang belum pernah mereka baca.
- 3. Menyediakan rekomendasi yang tepat bahkan untuk pengguna baru _(cold start problem)_, dengan mengatasi tantangan terkait data yang tidak lengkap.
- 
-### Solution Statement
-## Business Understanding
-
-### Problem Statement
 
 Proyek ini bertujuan untuk mengembangkan model guna memberikan rekomendasi buku berdasarkan riwayat data buku yang pernah dibaca oleh **user**. Berikut beberapa pernyataan masalah utama:
 
@@ -73,26 +60,32 @@ Dataset ini terdiri dari tiga file utama, yaitu:
 
 Dikarenakan data ini sudah dilakukan pra-pemrosesan dan pembersihan, maka persiapan yang dilakukan akan mengecualikan hal tersebut, berikut persiapan data yang dilakukan:
 
-1. **Pemilihan Kolom yang Relevan**
+1. **Drop Duplicates & Missing Value**
+  -   Menghapus data duplicate pada DataFrame `all_data` serta menghapus baris yang memiliki nilai kolom NaN
+    
+2. **Membuat Dataframe baru untuk seluruh buku**
+  -   Pertama buat list dari nilai kolom kolom `ISBN`, `Book_Title`, `Book_Author` . Kemudian buat dataframe baru dari ketiga list tersebut. Dataframe ini yang nantinya akan digunakan untuk ujicoba model
+
+3. **Pemilihan Kolom yang Relevan**
   -   Dari file **Books**, kolom `ISBN`, `Book-Title`, dan `Book-Author` dipertahankan untuk identifikasi buku.
   -   Dari file **Ratings**, kolom `User-ID`, `ISBN`, dan `Book-Rating` digunakan sebagai inti untuk membangun model.
   - Pada proyek ini, file **Users** tidak digunakan.
  
-2. **Penamaan Kolom**
+4. **Penamaan Kolom**
   - Mengubah nama kolom **Book-Title, Book-Author, dan User-ID** menjadi **Book_title, Book_Author, User_ID**
-  
-3. **Mengubah Nilai Kolom ke Numerik**
+
+5. **Mengubah Nilai Kolom ke Numerik**
   - Melakukan proses encoding untuk kolom **User_ID** dan **ISBN** menjadi tipe numerik agar dapat diproses oleh model. Proses encoding ini dilakukan dengan membuat dictionary dengan nilai key : value berupa _nilai kolom : nilai encoding_. Kemudian menyisipkan ke dalam dataFrame dengan fungsi **map()** , maka value akan disisipkan ke baris yang memiliki nilai sama dengan key.
   - Mengubah tipe data pada kolom **Book-Rating** menjadi float
  
-4. **Membatasi Jumlah Baris**
+6. **Membatasi Jumlah Baris**
   - Dikarenakan data yang teramat banyak, maka pada proyek ini akan membatasi jumlah data sebanyak 50.000 baris. Dan dengan pengambilan yang dilakukan secara acak.
 
-5. **Persiapan Data Latih**
+7. **Persiapan Data Latih**
   - Persiapan data latih dilakukan dengan memisahkan data menjadi dua bagian _training_ dan _test_ set. Perbandingannya adalah 80% _training set_ dan 20% _test set_.
  
- 6. **Normalisasi Rating**  
-Nilai rating yang awalnya berada pada rentang 0-10 dinormalisasi ke rentang 0-1 menggunakan rumus:
+8. **Normalisasi Rating**  
+  - Nilai rating yang awalnya berada pada rentang 0-10 dinormalisasi ke rentang 0-1 menggunakan rumus:
 
 $$ \text{Rating Normalisasi} = \frac{\text{Rating} - \text{Rating Minimum}}{\text{Rating Maksimum} - \text{Rating Minimum}}$$
 
@@ -215,7 +208,32 @@ Hasil ini menunjukkan bahwa model mampu memberikan prediksi dengan kesalahan rat
 
 Plot berikut menunjukkan perubahan nilai **Loss** (MSE) selama proses pelatihan model pada data pelatihan dan validasi:
 
-![Model Loss](https://github.com/bgskr/Submission-1-Mental-Dissorder-Classification/blob/f62c2d91d41ff5eaa9af25a4abe0fe03801d7f41/plot_final.png)
+![plot_final](https://github.com/user-attachments/assets/9e789952-b8c7-4050-964a-c48a390456f3)
+
 
 **Observasi:**  
 Dari grafik di atas, terlihat bahwa nilai **loss** pada data pelatihan terus menurun seiring bertambahnya epoch, yang menunjukkan bahwa model berhasil belajar dari data pelatihan. Pada data validasi, nilai **loss** cenderung stabil setelah beberapa epoch terakhir, yang menandakan bahwa model mencapai titik optimal dalam generalisasi tanpa mengalami overfitting. Hal ini juga didukung oleh penggunaan **Early Stopping**, yang membantu menghentikan pelatihan sebelum model mulai kehilangan kemampuan generalisasi pada data validasi.
+
+### Evaluasi Dampak Model terhadap Business Understanding  
+
+#### Menjawab Problem Statement  
+1. **Masalah 1**: Model yang dikembangkan berhasil memberikan prediksi yang baik untuk rekomendasi buku berdasarkan pola interaksi pengguna, meskipun terdapat pengguna yang belum pernah memberikan rating sebelumnya. Hal ini terlihat dari metrik evaluasi (MSE dan MAE) yang menunjukkan kesalahan prediksi cukup kecil. Dengan menggunakan **_item-based collaborative filtering_**, model mampu memberikan rekomendasi buku yang relevan kepada pengguna, bahkan jika data interaksi mereka terbatas.  
+
+2. **Masalah 2**: Dengan pendekatan **_collaborative filtering_**, model dapat menangani data yang tidak lengkap dan memberikan rekomendasi yang lebih personal. Penggunaan embedding layer untuk representasi pengguna dan buku memungkinkan model menangkap hubungan laten antar entitas, sehingga meningkatkan akurasi rekomendasi.  
+
+#### Mencapai Goals yang Diharapkan  
+- **Pencapaian Tujuan 1:** Sistem rekomendasi berhasil dilatih dengan baik untuk mengidentifikasi buku-buku yang relevan berdasarkan interaksi pengguna lain. Hal ini mendukung tujuan memberikan rekomendasi yang sesuai dengan pola pengguna.  
+- **Pencapaian Tujuan 2:** Model yang dibangun menggunakan embedding berhasil meningkatkan personalisasi rekomendasi. Berdasarkan metrik MAE sebesar 0.359, model menunjukkan kemampuan prediksi yang cukup baik, mendekati preferensi pengguna terhadap buku yang direkomendasikan.  
+- **Pencapaian Tujuan 3:** Model ini memberikan dasar solusi untuk mengatasi cold start problem, meskipun masih memerlukan evaluasi lebih lanjut pada data pengguna baru yang tidak memiliki riwayat pembacaan.  
+
+#### Dampak dari Solusi Statement  
+Solusi yang diusulkan, yaitu **_collaborative filtering_**, berdampak signifikan terhadap penyelesaian permasalahan rekomendasi buku. Model ini berhasil:  
+- Mengidentifikasi buku-buku yang relevan berdasarkan pola interaksi pengguna.  
+- Memberikan rekomendasi yang dapat diandalkan meskipun data pengguna tidak lengkap.  
+- Menghadirkan solusi berbasis machine learning yang mampu menangkap hubungan kompleks antar entitas dengan embedding representation.  
+
+Namun, ada beberapa hal yang perlu diperhatikan:  
+1. **Evaluasi pada Pengguna Baru:** Model ini perlu diuji lebih lanjut dengan data pengguna baru yang tidak memiliki riwayat pembacaan untuk memastikan pendekatan ini efektif mengatasi cold start problem.  
+2. **Feedback Loop:** Model dapat ditingkatkan dengan memanfaatkan feedback pengguna terhadap rekomendasi untuk memperbarui dan meningkatkan kualitas rekomendasi di masa depan.  
+
+Dengan demikian, model yang dikembangkan telah memberikan solusi yang menjawab problem statement dan mencapai sebagian besar goals yang ditetapkan, dengan ruang untuk perbaikan lebih lanjut.  
